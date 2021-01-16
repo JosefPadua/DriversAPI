@@ -7,6 +7,11 @@ Na níže uvedeném diagramu je znázorněný vztah mezi classama.
 ![Diagram](https://ctrlv.cz/shots/2021/01/15/5zci.png)
 
 ## Struktura výstupních JSON dat
+Výchozí odkaz: 
+```
+https://localhost:44361/driversdata
+```
+
 ```
 {
     "data": {
