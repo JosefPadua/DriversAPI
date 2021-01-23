@@ -73,12 +73,62 @@ namespace DriversAPI.Services
                 }
 
             }
-            //foreach(var item in models.Where(x => x.Value))
-            //{
-            //    models.Remove(item.Key);
-            //}
+            int[] sizes = new int[models.Values.Count];
+            int i = 0;
+            foreach(int value in models.Values)
+            {
+                sizes[i] = value;
+                i++;
+            }
+            List<int> thbiggest = get3largest(sizes, models.Values.Count);
+            Console.Out.Write(thbiggest);
 
+            var modelstodelete = models.Where(x => !thbiggest.Contains(x.Value));
+            foreach(var model in modelstodelete)
+            {
+                models.Remove(model.Key);
+            }
             return models;
+        }
+        private List<int> get3largest(int[] arr,
+                              int arr_size)
+        {
+            List<int> sizes = new List<int>();
+            int i, first, second, third;
+
+
+            if (arr_size < 3)
+            {
+                sizes.Add(arr.Max());
+                return sizes;
+            }
+
+            third = first = second = 000;
+            for (i = 0; i < arr_size; i++)
+            {
+
+                if (arr[i] > first)
+                {
+                    third = second;
+                    second = first;
+                    first = arr[i];
+                }
+
+
+                else if (arr[i] > second)
+                {
+                    third = second;
+                    second = arr[i];
+                }
+
+                else if (arr[i] > third)
+                    third = arr[i];
+            }
+            sizes.Insert(0, first);
+            sizes.Insert(1, second);
+            sizes.Insert(2, third);
+            
+            return sizes;
         }
 
         private Dictionary<string, int> calcAverage(Dictionary<string, List<int>> dictionary)
